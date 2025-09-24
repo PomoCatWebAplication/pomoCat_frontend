@@ -1,39 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
+
 :root {
-  --background: #ffffff;
+  --background: #FFEFD7;
   --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #FFEFD7;
+    --foreground: #171717;
   }
 }
 
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  overflow: hidden;
+  height: 100%;
+
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Madimi One", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
 
 @media (prefers-color-scheme: dark) {
   html {

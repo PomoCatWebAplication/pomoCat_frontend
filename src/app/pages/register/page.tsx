@@ -19,14 +19,15 @@ export default function Home() {
 
       <div className={styles.card}>
         <form className={styles.form}>
-          <input type="text" name="username" id="username_lg" placeholder="Username" />
-          <input type="password" name="password" id="password_lg" placeholder="Password" />
-          <input type="submit" value="Log in" id="log-in" />
+          <input type="text" name="username" id="username_rg" placeholder="Username" />
+          <input type="password" name="password" id="password_rg" placeholder="Password" />
+          <input type="password" name="conPassword" id="conPassword_rg" placeholder="confirm password" />
+          <input type="submit" value="Register" id="register" />
         </form>
 
         <div className={styles.footer}>
           <p>Don&apos;t have an account?</p>
-          <Link href="/pages/register" id="register_lg">Register now</Link>
+          <Link href="" id="register_lg">Register now</Link>
         </div>
       </div>
     </div>
