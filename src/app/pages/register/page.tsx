@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 
-export default function Home() {
+export default function register() {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -26,8 +26,8 @@ export default function Home() {
         </form>
 
         <div className={styles.footer}>
-          <p>Don&apos;t have an account?</p>
-          <Link href="" id="register_lg">Register now</Link>
+          <p>Already have an account?</p>
+          <Link href="/" id="register_lg">Log-in</Link>
         </div>
       </div>
     </div>

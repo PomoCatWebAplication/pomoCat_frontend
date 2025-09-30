@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
+import { LoginForm } from "./auth/login-form";
 
 export default function Home() {
   return (
@@ -18,12 +19,7 @@ export default function Home() {
       </div>
 
       <div className={styles.card}>
-        <form className={styles.form}>
-          <input type="text" name="username" id="username_lg" placeholder="Username" />
-          <input type="password" name="password" id="password_lg" placeholder="Password" />
-          <input type="submit" value="Log in" id="log-in" />
-        </form>
-
+        <LoginForm />
         <div className={styles.footer}>
           <p>Don&apos;t have an account?</p>
           <Link href="/pages/register" id="register_lg">Register now</Link>
