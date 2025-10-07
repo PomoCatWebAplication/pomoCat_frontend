@@ -11,8 +11,8 @@ export default function Home() {
         <Image
           alt="Tomate"
           src="/Tomate_coin.png"
-          width={200}
-          height={200}
+          width={100}
+          height={100}
           className={styles.tomato} 
           priority
         />
