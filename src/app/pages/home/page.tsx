@@ -1,5 +1,5 @@
-export default function home () {
-    return (
-        <h1>Home</h1>
-    )
+import Link from "next/link";
+
+export default function PetEditPage() {
+  
 }

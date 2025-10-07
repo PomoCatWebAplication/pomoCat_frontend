@@ -1,0 +1,198 @@
+html, 
+body {
+  overflow: visible;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #F6E7C1;
+  min-height: 100vh;
+  padding: 20px;
+  overflow-y: auto;
+  padding: 3rem 2rem 6rem;
+}
+.logo {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 800px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.logoText {
+  font-family: "Madimi One";
+  font-size: 2.5rem;
+}
+.tomato {
+  position: absolute;
+  bottom: -60px;   
+  right: -60px;    
+  width: clamp(60px, 12vw, 100px);
+  height: auto;
+}
+
+.tomatoBadge {
+  background: #CFD7AF;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+}
+
+.title {
+  font-family: "Madimi One";
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.calendarWrapper {
+  width: 90%;
+  max-width: 800px;
+  background: #ffffffcc;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  overflow: auto;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+}
+
+.headerRow, .row {
+  display: grid;
+  grid-template-columns: 60px repeat(7, 1fr);
+}
+
+.dayHeader {
+  font-weight: bold;
+  text-align: center;
+  padding: 6px;
+  background: #CFD7AF;
+  border: 1px solid #ccc;
+}
+
+.hourCell {
+  text-align: right;
+  padding: 6px 8px;
+  font-weight: 600;
+  background: #CFD7AF;
+  border: 1px solid #ccc;
+}
+
+.cell {
+  border: 1px solid #ccc;
+  min-height: 40px;
+  padding: 4px;
+  background: #ffffffcc;
+}
+
+.task {
+  background: #CFD7AF;
+  border-radius: 8px;
+  padding: 4px 6px;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.tableWrapper {
+  overflow-x: auto; 
+  overflow-y: visible;
+  max-height: 80vh; 
+  width: 100%;
+}
+
+.bottomSlider {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #CFD7AF;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sliderButton {
+  background-color: #fff8f0;
+  border: 2px solid #d8b46a;
+  border-radius: 1rem;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+  color: black;
+  font-family: "Madimi One";
+  font: "Madimi One";
+}
+
+.sliderButton:hover {
+  background-color: #c7da7d;
+}
+
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0; /* Añadido para asegurar que tome todo el ancho */
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #CFD7AF;
+  padding: 10px 0;
+  border-top: 2px solid #41513F;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0; /* Evita que los botones se compriman */
+}
+
+.navButton:hover {
+  background-color: #b9c59b;
+  transform: scale(1.1);
+}
+
+.navButton img,
+.navButton svg {
+  display: block; /* Elimina espacios extraños alrededor de las imágenes */
+}
+
+/* Si el div contenedor tiene estilos que interfieren, añade esto: */
+.bottomNav {
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
