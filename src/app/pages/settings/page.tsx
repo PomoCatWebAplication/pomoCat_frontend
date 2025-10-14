@@ -37,6 +37,7 @@ export default function SettingsPage() {
   const [language, setLanguage] = useState<LanguageOption["id"]>("es");
 
   return (
+
     <main className={styles.page}>
       <div className={styles.panel}>
         <header className={styles.header}>

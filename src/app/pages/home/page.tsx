@@ -1,8 +1,13 @@
+"use client"
 import styles from "./page.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import MinutesSlider from "@/components/MinuteSlider";
+
 
 export default function Main() {
+    const [visible, setVisible] = useState(false);
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -79,14 +84,17 @@ export default function Main() {
         <div className={styles.card}>
 
           <div className={styles.controller}>
-            <h1>12:00</h1>
+            <div className={styles.timmers}>
+              <h1>30 study</h1>
+              <h1>15 rest</h1>
+            </div>
             <form>
-              <button type="button">Short</button>
-              <button type="button">Medium</button>
-              <button type="button">Long</button>
+              <button type="button" className={styles.timeBtn} >Short</button>
+              <button type="button" className={styles.timeBtn} >Medium</button>
+              <button type="button" className={styles.timeBtn} >Long</button>
             </form>
 
-            <button>
+            <button className={styles.timeBtn} >
                 <Image
                   src="/icons/play-solid-full.svg"
                   alt="play"
@@ -96,27 +104,76 @@ export default function Main() {
                 />
               </button>
 
-              <div className={styles.settingsController}>
-
-
-              </div>
-
           </div>
 
-          <button>
-            <Image
-              src="/icons/settings.svg"
-              alt="add"
-              width={20}
-              height={20}
-              className={styles.addIcon}
-            />
+          <div className={`${styles.buttonRow} ${visible ? styles.close : ""}`}>
+            <button
+              type="button"
+              aria-expanded={visible}
+              aria-controls="settings-panel"
+              onClick={() => setVisible(v => !v)}
+              className={styles.timeBtn}
+          >
+              <Image
+                src="/icons/settings.svg"
+                alt="settings"
+                width={20}
+                height={20}
+                className={styles.addIcon}
+              />
             </button>
+          </div>
 
-          <div>
+          <div
+            id="settings-panel"
+            className={`${styles.insideSettings} ${visible ? styles.open : ""}`}
+          >
 
+            <div className={styles.closeBtn}>
+              <button
+                type="button"
+                onClick={() => setVisible(v => !v)}
+                className={styles.closebtnS}
+              >
+                <Image
+                src="/icons/close.svg"
+                alt="close"
+                width={20}
+                height={20}
+                />
+              </button>
+            </div>
+
+            <div className={styles.settingsControl}>
+
+                <MinutesSlider
+                  min={1}
+                  max={120}
+                  step={1}
+                  defaultValue={30}
+                />
+
+                <MinutesSlider
+                  min={1}
+                  max={120}
+                  step={1}
+                  defaultValue={15}
+                />
+
+            </div>
+
+            <div className={styles.buttonSettings}>
+              <button className={styles.settingsBtn}>
+                <Image
+                  src="/icons/play-solid-full.svg"
+                  alt="Play_with_settings"
+                  width={20}
+                  height={20}
+                />
+              </button>
+            </div>
             
-          
+
           </div>
           
         </div>

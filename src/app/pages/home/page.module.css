@@ -96,8 +96,129 @@
   margin: 20px;
 }
 
-
-.controller {
-  background-color: aqua;
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+  z-index: 0;
 }
 
+.controller {
+  background-color: #d4dbb2;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  margin: 10px;
+  width: 100%;
+  padding: 5px;
+}
+
+.timmers {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.timeBtn {
+  background-color: #ebeed9;
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  margin: 2px;
+}
+
+.timeBtn:hover {
+  background-color: rgb(31, 141, 104);
+}
+
+.settingsBtn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 10px;
+}
+
+.buttonRow {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.buttonRow.close {
+  display: none;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.insideSettings {
+  display: none;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.insideSettings.open {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  background-color: #D4DBB2;
+  border-radius: 20px;
+  flex:1;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.closeBtn {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.closebtnS {
+  background-color: transparent;
+  color: black;
+  border: none;
+  border-radius: 0px 20px 0px 0px;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.settingsControl {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.settingsBtn {
+  background-color: #ebeed9;
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  margin: 2px;
+  width: 20%;
+  height: 80%;
+}
+
+.settingsBtn:hover {
+  background-color: rgb(31, 141, 104);
+}
+
+.buttonSettings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
