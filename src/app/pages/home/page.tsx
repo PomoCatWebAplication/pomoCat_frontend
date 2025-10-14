@@ -24,8 +24,8 @@ export default function Main() {
             <Image
             src="/icons/home.svg"
             alt="home"
-            width={5}
-            height={5}
+            width={100}
+            height={100}
             className={styles.icon}
           />
           </Link>
