@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./calendar.module.css";
 import Image from "next/image";
-import { FaClock, FaCalendarAlt, FaShoppingCart, FaCog } from "react-icons/fa";
+import Link from "next/link";
+
 
 export default function CalendarPage() {
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -18,25 +19,66 @@ export default function CalendarPage() {
     Saturday: { "15:00": ["Salida Con Amigos"] },
     Sunday: { "12:00": ["Almuerzo Con La Familia"] },
   };
-
+  
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-      <div className={styles.logo}>
-        <h1>PomoCat</h1>
-        <Image
-          alt="Tomate"
+      <header className={styles.header}>
+        <div className={styles.coins}>
+          <Image
           src="/Tomate_coin.png"
-          width={50}
-          height={50}
-          className={styles.tomato} 
-          priority
-        />
-      </div>
-        <div className={styles.tomatoBadge}>
-          🍉 <span>030</span>
+          alt="coin"
+          className={styles.pomos}
+          width={20}
+          height={20}
+          />
+
+          <p>120</p>
         </div>
-      </div>
+
+        <nav className={styles.navigator}>
+
+          <Link href="/pages/home">
+            <Image
+            src="/icons/home.svg"
+            alt="home"
+            width={5}
+            height={5}
+            className={styles.icon}
+          />
+          </Link>
+
+          <Link href="/pages/calendar">
+            <Image
+            src="/icons/calendar-regular-full.svg"
+            alt="home"
+            width={5}
+            height={5}
+            className={styles.icon}
+          />
+          </Link>
+
+          <Link href="/pages/shop">
+            <Image
+            src="/icons/shopping-cart.svg"
+            alt="home"
+            width={5}
+            height={5}
+            className={styles.icon}
+          />
+          </Link>
+
+          <Link href="/pages/settings">
+            <Image
+            src="/icons/settings.svg"
+            alt="home"
+            width={5}
+            height={5}
+            className={styles.icon}
+          />
+          </Link>
+          
+        </nav>
+      </header>
 
       <h2 className={styles.title}>Calendar</h2>
 
@@ -64,12 +106,7 @@ export default function CalendarPage() {
         </div>
       </div>
 
-      <nav className={styles.bottomNav}>
-        <button className={styles.navButton}><Image alt="Casita" src="\Icons\home.svg" width={20} height={20} className={styles.tomato} priority /></button>
-        <button className={styles.navButton}><Image alt="Calendario" src="\Icons\calendar-regular-full.svg" width={20} height={20} className={styles.tomato} priority /></button>
-        <button className={styles.navButton}><Image alt="Tienda" src="\Icons\shopping-cart.svg" width={20} height={20} className={styles.tomato} priority /></button>
-        <button className={styles.navButton}><Image alt="Settings" src="\Icons\settings.svg" width={20} height={20} className={styles.tomato} priority /></button>
-      </nav>
+     
     </div>
   );
 }
