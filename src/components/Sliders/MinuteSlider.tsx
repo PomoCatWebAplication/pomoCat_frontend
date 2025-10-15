@@ -9,6 +9,7 @@ type Props = {
   step?: number;
   defaultValue?: number;
   onChange?: (v: number) => void;
+  label?: string
 };
 
 export default function MinutesSlider({
@@ -17,6 +18,7 @@ export default function MinutesSlider({
   step = 5,
   defaultValue = 30,
   onChange,
+  label = "estudio",
 }: Props) {
   const [value, setValue] = useState(defaultValue);
   const id = useId();
@@ -34,12 +36,13 @@ export default function MinutesSlider({
     const v = Number(e.target.value);
     setValue(v);
     onChange?.(v);
+
   };
 
   return (
     <div className={styles.sliderControl}>
       <label htmlFor={id} className={styles.label}>
-        Minutos de estudio: <output className={styles.value}>{value}</output>
+        Minutos de {label}: <output className={styles.value}>{value}</output>
       </label>
 
       <div className={styles.trackWrap}>

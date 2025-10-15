@@ -4,12 +4,14 @@ import { useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
+import CatWithPad from "@/components/cat/CatWithPad";
+import ItemShop from "@/components/items/ItemShop";
 
 export default function SettingsButton() {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.coins}>
           <Image
@@ -68,10 +70,22 @@ export default function SettingsButton() {
         </nav>
       </header>
 
-    
+      <div className={styles.main}>
+          <nav className={styles.display_items}>
+              <div className={styles.itemsScroll}>
+                  <ItemShop/>
+              </div>
+          </nav>
+
+          <div className={styles.display_cat}>
+              <CatWithPad/>
+          </div>
+      </div>
+
+      <footer className={styles.footer}>
+
+      </footer>
 
     </div>
-
-    
   );
 }

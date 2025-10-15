@@ -3,7 +3,8 @@ import styles from "./page.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import MinutesSlider from "@/components/MinuteSlider";
+import MinutesSlider from "@/components/Sliders/MinuteSlider";
+import CatWithPad from "@/components/cat/CatWithPad";
 
 
 export default function Main() {
@@ -71,14 +72,9 @@ export default function Main() {
       <main className={styles.main}>
 
         <div className={styles.cat}>
-          <Image
-            src="/cats/defaultCat.png"
-            alt="cat"
-            width={700}   
-            height={700}
-            className={styles.catImg}
-            priority
-          />
+
+          <CatWithPad/>
+          
         </div>
 
         <div className={styles.card}>
@@ -158,6 +154,7 @@ export default function Main() {
                   max={120}
                   step={1}
                   defaultValue={15}
+                  label="descanso"
                 />
 
             </div>

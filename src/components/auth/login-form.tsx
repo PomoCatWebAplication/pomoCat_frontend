@@ -14,7 +14,7 @@ export function LoginForm() {
 
     const setCookie = (name: string, value: string, days = 7) => {
         const expires = new Date(Date.now() + days * 864e5).toUTCString();
-        const sameSite = "Lax"; // Para dev en http
+        const sameSite = "Lax";
         document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=${sameSite}`;
     };
 
@@ -38,8 +38,6 @@ export function LoginForm() {
         }
 
     }
-
-
 
     return (
         <form className={styles.form} onSubmit={handleSubmit}>

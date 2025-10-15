@@ -1,0 +1,119 @@
+
+.wrapper{
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  
+  scroll-behavior: smooth;         
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable both-edges;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+}
+
+.wrapper::-webkit-scrollbar{ width: 10px; }
+.wrapper::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  background: rgba(0,0,0,.22);
+}
+.wrapper::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+.wrapper{
+  scrollbar-width: thin;
+  scrollbar-color: #D4DBB2 transparent;
+}
+
+.itemList{
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  padding: 8px 8px 16px; 
+}
+
+.card {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: center;
+  justify-items: center;
+
+  background: #D2DBB4;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  padding: 12px;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.card:focus-within {
+  outline: 2px solid #94a3b8;
+  outline-offset: 2px;
+}
+
+.label { width: 100%; text-align: center; }
+.label h3{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.image { width: 100%; display: grid; place-items: center; padding: 6px 0; }
+
+.img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  image-rendering: auto;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+
+.price h4 { margin: 0; font-size: 0.85rem; font-weight: 600; opacity: 0.9; }
+.price p { margin: 0; font-weight: 700; }
+
+.skeletonBox {
+  width: 96px;
+  height: 96px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #cfd6b6 25%, #dfe6c9 37%, #cfd6b6 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}
+
+
+@media (max-width: 900px){
+  .main{
+    grid-template-columns: 1fr; 
+  }
+  .display_cat{
+    position: static; 
+  }
+}
+
+
