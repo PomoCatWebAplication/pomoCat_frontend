@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useState, type CSSProperties } from "react";
 import styles from "./page.module.css";
 
@@ -39,6 +41,61 @@ export default function SettingsPage() {
   return (
 
     <main className={styles.page}>
+          <header className={styles.topBar}>
+        <div className={styles.coins}>
+          <Image
+            src="/Tomate_coin.png"
+            alt="coin"
+            className={styles.pomos}
+            width={40}
+            height={40}
+          />
+          <p>120</p>
+        </div>
+
+        <nav className={styles.navigator}>
+          <Link href="/pages/home">
+            <Image
+              src="/icons/home.svg"
+              alt="home"
+              width={5}
+              height={5}
+              className={styles.icon}
+            />
+          </Link>
+
+          <Link href="/pages/calendar">
+            <Image
+              src="/icons/calendar-regular-full.svg"
+              alt="calendar"
+              width={5}
+              height={5}
+              className={styles.icon}
+            />
+          </Link>
+
+          <Link href="/pages/shop">
+            <Image
+              src="/icons/shopping-cart.svg"
+              alt="shop"
+              width={5}
+              height={5}
+              className={styles.icon}
+            />
+          </Link>
+
+          <Link href="/pages/settings">
+            <Image
+              src="/icons/settings.svg"
+              alt="settings"
+              width={5}
+              height={5}
+              className={styles.icon}
+            />
+          </Link>
+        </nav>
+      </header>
+
       <div className={styles.panel}>
         <header className={styles.header}>
           <h1>Configuración</h1>
