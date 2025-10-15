@@ -1,7 +1,7 @@
 "use client"
 import { useRouter } from "next/navigation";
-import  styles  from "../page.module.css"
-import { auth } from "./auth.api.";
+import  styles  from "../../app/page.module.css"
+import { auth } from "./auth.api";
 import { FormEvent, useState } from "react";
 
 

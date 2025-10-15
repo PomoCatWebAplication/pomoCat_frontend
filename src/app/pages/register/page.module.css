@@ -50,6 +50,7 @@
   gap: 12px;
 }
 
+.form input[type="email"],
 .form input[type="text"],
 .form input[type="password"] {
   text-align: center;
