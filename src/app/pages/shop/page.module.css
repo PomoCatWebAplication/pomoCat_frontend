@@ -112,3 +112,50 @@
   overscroll-behavior: contain;
 }
 
+.drawerBackdrop{ 
+  position:fixed; 
+  inset:0; 
+  background:rgba(0,0,0,.35); 
+  display:grid; 
+  place-items:center; 
+  z-index:50; 
+}
+
+.drawerCard{ 
+  width:min(640px,92vw); 
+  max-height:85vh; 
+  overflow:auto; 
+  background:#D4DBB2;  
+  border-radius:16px; 
+  padding:16px; 
+  box-shadow:0 10px 30px rgba(0,0,0,.4); 
+  position:relative; 
+}
+
+.closeBtn{ 
+  position:absolute; 
+  top:10px; 
+  right:12px; 
+  background:transparent; 
+  border:none; 
+  color:inherit; 
+  cursor:pointer; 
+  font-size:1.25rem; 
+}
+
+.imgFrame{
+  display:grid; 
+  place-items:center;
+  border-radius:12px; 
+  border:1px solid black;
+  padding:12;
+  
+  position: relative;
+  width: 180px;
+  height: 220px;
+}
+
+.itemImg{
+  object-fit: contain;
+  object-position: center;
+}

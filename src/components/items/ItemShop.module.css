@@ -101,6 +101,9 @@
   animation: shimmer 1.2s infinite;
 }
 
+.cardLink { text-decoration: none; color: inherit; }
+.card { cursor: pointer; }
+
 @keyframes shimmer {
   0% { background-position: 100% 0; }
   100% { background-position: 0 0; }

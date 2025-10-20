@@ -2,20 +2,12 @@
 import Image from "next/image";
 import styles from "./CatWithPad.module.css";
 
-type Props = {
-  src?: string;
-  alt?: string;
-  size?: number; // tamaño base del contenedor (px)
-};
+type Props = { src: string; alt?: string; size?: number };
 
-export default function CatWithPad({
-  src = "/cats/defaultCat.png",
-  alt = "cat",
-  size = 360,
-}: Props) {
+export default function CatWithPadClient({ src, alt = "cat", size = 330 }: Props) {
   return (
     <div className={styles.cat}>
-      <div className={styles.catWrap} style={{ "--size": `${size}px` } as React.CSSProperties}>
+      <div className={styles.catWrap} style={{ ["--size" as any]: `${size}px` }}>
         <Image
           src={src}
           alt={alt}

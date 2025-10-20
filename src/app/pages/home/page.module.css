@@ -72,7 +72,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  padding: 10px;
+  padding: 26px;
 }
 
 .cat{
@@ -121,7 +121,25 @@
 .timmers {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 80px;
+}
+
+.inside_timmers {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+}
+
+.inside_timmers h1 {
+  margin: 0px;
+}
+
+.inside_timmers h2 {
+  margin: 2px;
+  margin-bottom: 10px;
 }
 
 .timeBtn {
