@@ -1,4 +1,4 @@
-import Me from "../auth/me.server";
+import Me from "../auth/me.api";
 
 type Settings = {
     _id: string;
