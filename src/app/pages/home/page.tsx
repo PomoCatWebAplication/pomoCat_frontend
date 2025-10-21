@@ -1,6 +1,6 @@
 import GetCat, { GetItems, type ItemDto } from "@/components/cat/cat.api";
 import HomeClient from "./HomeClient";
-import { Me } from "@/components/auth/auth.api";
+import Me  from "@/components/auth/me.api";
 import { SoundProvider } from "@/context/soundContext";
 import getSettings from "@/components/settings/settings.api";
 

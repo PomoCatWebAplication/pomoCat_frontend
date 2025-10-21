@@ -1,6 +1,6 @@
 import GetCat, { GetItems, ItemDto } from "@/components/cat/cat.api";
 import ShopClient from "./Shopclient";
-import { Me } from "@/components/auth/auth.api";
+import  Me from "@/components/auth/me.api";
 
 export default async function Page() {
   const cat = await GetCat().catch(() => null);
