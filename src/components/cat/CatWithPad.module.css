@@ -12,6 +12,7 @@
   aspect-ratio: 1 / 1;
 }
 
+
 .catImg {
   object-fit: contain;
   padding: 8%;
@@ -28,6 +29,20 @@
   border-radius: 50%;
   background-color: #D2DBB4;
   z-index: 0;
+}
+
+.catHat,
+.catAccessory {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(var(--x, 0), var(--y, 0));
+  pointer-events: none;
+  z-index: 2;
+}
+
+.itemImg {
+  display: block;
 }
 
 @keyframes breathe {

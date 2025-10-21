@@ -116,7 +116,7 @@ export async function auth(data: LoginPayload) {
 }
 
 
-export default async function Me() {
+export async function Me() {
   const cookieStore = await cookies();
   const token = cookieStore.get("access_token")?.value ?? null;
 

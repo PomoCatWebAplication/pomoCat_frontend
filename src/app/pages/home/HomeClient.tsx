@@ -3,12 +3,13 @@
 import styles from "./page.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { use, useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import MinutesSlider from "@/components/Sliders/MinuteSlider";
 import CatWithPadClient from "@/components/cat/CatWithPad";
 import { useSound } from "@/context/soundContext";
+import type { ItemDto } from "@/components/cat/cat.api";
 
-type Props = { catSrc: string; coins_user: string, userId: string };
+type Props = { catSrc: string; coins_user: string, userId: string, hat?: ItemDto, accessory?: ItemDto  };
 type Phase = "study" | "rest";
 
 const ms = (min: number) => min * 60 * 1000;
@@ -20,7 +21,7 @@ export const formatMMSS = (msv: number) => {
   return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 };
 
-export default function HomeClient({ catSrc, coins_user, userId }: Props) {
+export default function HomeClient({ catSrc, coins_user, userId, hat, accessory }: Props) {
   const sfx = useSound().sfx;
   const music = useSound().music;
 
@@ -41,10 +42,12 @@ export default function HomeClient({ catSrc, coins_user, userId }: Props) {
   const [running, setRunning] = useState(false);
   const [phase, setPhase] = useState<Phase>("study");
   const [timeLeft, setTimeLeft] = useState(ms(study));
-  const [loop, setLoop] = useState(0);
+  const [loop, setLoop] = useState(1);
 
   const pauseref = useRef(isPause);
   const phaseref = useRef<Phase>(phase);
+
+  const loopref = useRef(1);
 
   const endAtRef = useRef<number | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -65,9 +68,10 @@ export default function HomeClient({ catSrc, coins_user, userId }: Props) {
   }, [userId, loop]);
 
   const removeTaskAndAddCoins = (index: number) => {
+    sfx.cuteCat.play();
     setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
     void addCoins();
-    setCoins((prevCoins) => prevCoins + 10 + loop * 50);
+    setCoins((prevCoins) => prevCoins + 10 + loopref.current * 50);
   };
 
   const removeAllTasks = () => {
@@ -103,10 +107,16 @@ export default function HomeClient({ catSrc, coins_user, userId }: Props) {
   }, []);
 
   const scheduleNextPhase = useCallback(
-    (next: Phase) => {
+    (next: Phase, count: number) => {
       setPhase(next);
       phaseref.current = next;
-      const duration = next === "study" ? studyms : restms;
+      let duration: number = next === "study" ? studyms : restms;
+      if (next === "rest") {
+        sfx.purring.play();
+      }
+      if (next === "rest" && count % 6 === 0) {
+        duration *= 3;
+      }
       endAtRef.current = Date.now() + duration;
       setTimeLeft(duration);
     },
@@ -120,9 +130,11 @@ export default function HomeClient({ catSrc, coins_user, userId }: Props) {
     setTimeLeft(remaining);
     if (remaining === 0) {
       setLoop((l) => l + 1);
+      const loopNow = loopref.current + 1;
+      loopref.current = loopNow;
       const wasPhase = phaseref.current;
       const next: Phase = wasPhase === "study" ? "rest" : "study";
-      scheduleNextPhase(next);
+      scheduleNextPhase(next, loopNow);
     }
   }, [scheduleNextPhase]);
 
@@ -142,8 +154,9 @@ export default function HomeClient({ catSrc, coins_user, userId }: Props) {
       setRunning(true);
       setPause(false);
       pauseref.current = false;
-      setLoop(0);
-      scheduleNextPhase("study");
+      setLoop(1);
+      loopref.current = 1;
+      scheduleNextPhase("study", loopref.current);
       endAtRef.current = Date.now() + localStudyms;
       setTimeLeft(localStudyms);
       try {
@@ -152,7 +165,7 @@ export default function HomeClient({ catSrc, coins_user, userId }: Props) {
       tick();
       timerRef.current = setInterval(tick, 1000);
     },
-    [clear, tick, music, scheduleNextPhase]
+    [clear, tick, music, scheduleNextPhase, loopref]
   );
 
   const pause = useCallback(() => {
@@ -175,16 +188,19 @@ export default function HomeClient({ catSrc, coins_user, userId }: Props) {
   }, [clear]);
 
   function Short() {
+    sfx.meow1.play();
     setRest(5);
     setStudy(25);
   }
 
   function Medium() {
+    sfx.meow1.play();
     setRest(10);
     setStudy(30);
   }
 
   function Long() {
+    sfx.meow1.play();
     setRest(10);
     setStudy(45);
   }
@@ -192,25 +208,25 @@ export default function HomeClient({ catSrc, coins_user, userId }: Props) {
   function handleStart() {
     setSession(true);
     setVisible(false);
-    sfx.meow.play();
+    sfx.meow1.play();
     start(study, rest);
   }
 
   function handleStop() {
     setSession(false);
     setPause(false);
-    sfx.meow.play();
+    sfx.meow1.play();
     stop();
     removeAllTasks();
   }
 
   function handlePause() {
-    sfx.meow.play();
+    sfx.meow1.play();
     pause();
   }
 
   function handleResume() {
-    sfx.meow.play();
+    sfx.meow1.play();
     resume();
   }
 
@@ -263,7 +279,7 @@ export default function HomeClient({ catSrc, coins_user, userId }: Props) {
 
       <main className={styles.main}>
         <div className={styles.cat}>
-          <CatWithPadClient src={catSrc} size={330} />
+          <CatWithPadClient src={catSrc} size={330} hat={hat} accessory={accessory}/>
         </div>
 
         <section className={styles.right}>
@@ -337,8 +353,8 @@ export default function HomeClient({ catSrc, coins_user, userId }: Props) {
               </div>
 
               <div className={styles.settingsControl}>
-                <MinutesSlider min={1} max={120} step={1} label="study" value={study} onChange={setStudy} />
-                <MinutesSlider min={1} max={120} step={1} label="rest" value={rest} onChange={setRest} />
+                <MinutesSlider id="study-slyder" min={1} max={120} step={1} label="study" value={study} onChange={setStudy} />
+                <MinutesSlider id="rest-slyder" min={1} max={120} step={1} label="rest" value={rest} onChange={setRest} />
               </div>
             </div>
 

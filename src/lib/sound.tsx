@@ -4,20 +4,34 @@ import { Howl } from "howler";
 export const sound = {
   meow: new Howl({
     src: ["/vfx/meow.mp3"],
-    volume: 0.5,
+    volume: 0.3,
     preload: true,
     html5: true,
-    onloaderror: (id, err) => console.warn("SFX meow load error", err),
-    onplayerror: (id, err) => console.warn("SFX meow play error", err),
   }),
   prrr: new Howl({
     src: ["/vfx/prrr.mp3"],
     volume: 0.5,
     preload: true,
     html5: true,
-    onloaderror: (id, err) => console.warn("SFX prrr load error", err),
-    onplayerror: (id, err) => console.warn("SFX prrr play error", err),
   }),
+  cuteCat: new Howl({
+    src: ["/vfx/cuteCatMeow.mp3"],
+    volume: 0.5,
+    preload: true,
+    html5: true,
+  }),
+  meow1: new Howl({
+    src: ["/vfx/meow1.mp3"],
+    volume: 0.5,
+    preload: true,
+    html5: true,
+  }),
+  purring: new Howl({
+    src: ["/vfx/purring.mp3"],
+    volume: 0.5,
+    preload: true,
+    html5: true,
+  })
 };
 
 export const bmg = new Howl({
@@ -25,6 +39,4 @@ export const bmg = new Howl({
   volume: 0.3,
   loop: true,
   html5: true,
-  onloaderror: (id, err) => console.warn("BGM load error", err),
-  onplayerror: (id, err) => console.warn("BGM play error", err),
 });
