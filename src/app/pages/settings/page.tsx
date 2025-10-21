@@ -1,4 +1,4 @@
-import Me from "@/components/auth/auth.api";
+import { Me } from "@/components/auth/auth.api";
 import SettingsClient from "./SettingsClient";
 import { SoundProvider } from "@/context/soundContext";
 import getSettings from "@/components/settings/settings.api";

@@ -1,9 +1,10 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 import { LoginForm } from "@/components/auth/login-form";
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
