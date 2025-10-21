@@ -8,11 +8,12 @@ import styles from "./page.module.css";
 import CatWithPad from "@/components/cat/CatWithPad";
 import ItemShop from "@/components/items/ItemShop";
 import ItemDetailDrawer from "./ItemDetailDrawer";
+import { ItemDto } from "@/components/cat/cat.api";
 
 
-type Props = { catSrc: string; userCoins: string, userId: string };
+type Props = { catSrc: string; userCoins: string, userId: string,  hat?: ItemDto, accessory?: ItemDto};
 
-export default function ShopClient({ catSrc, userCoins, userId }: Props) {
+export default function ShopClient({ catSrc, userCoins, userId, hat, accessory }: Props) {
   const search = useSearchParams();
   const router = useRouter();
   const selectedId = useMemo(() => search.get("item"), [search]);
@@ -38,7 +39,9 @@ export default function ShopClient({ catSrc, userCoins, userId }: Props) {
         <nav className={styles.display_items}>
           <div className={styles.itemsScroll}><ItemShop /></div>
         </nav>
-        <div className={styles.display_cat}><CatWithPad src={catSrc} /></div>
+        <div className={styles.display_cat}>
+          <CatWithPad src={catSrc} hat={hat} accessory={accessory} size={330} />
+          </div>
       </div>
 
       {selectedId && (

@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import styles from "./MinutesSlider.module.css";
 
 type Props = {
+  id?: string
   min?: number;
   max?: number;
   step?: number;
@@ -13,6 +14,7 @@ type Props = {
 };
 
 export default function MinutesSlider({
+  id,
   min = 0,
   max = 100,
   step = 5,
@@ -20,8 +22,8 @@ export default function MinutesSlider({
   onChange,
   label = "estudio",
 }: Props) {
-  const id = useId();
   const percent = useMemo(() => ((value - min) * 100) / (max - min), [value, min, max]);
+  const safeId = id ?? `slider-${label.replace(/\s+/g, "-").toLowerCase()}`;
 
   const styleVars = {
     "--value": `${percent}%`,
