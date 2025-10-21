@@ -19,6 +19,7 @@
     "@mui/material": "^7.3.4",
     "@mui/styled-engine-sc": "^7.3.3",
     "framer-motion": "^12.23.22",
+    "howler": "^2.2.4",
     "jose": "^6.1.0",
     "next": "15.5.4",
     "react": "19.1.0",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/howler": "^2.2.12",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

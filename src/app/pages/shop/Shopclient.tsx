@@ -21,14 +21,12 @@ export default function ShopClient({ catSrc, userCoins, userId }: Props) {
 
   return (
     <div className={styles.container}>
-      {/* header que ya tienes */}
       <header className={styles.header}>
         <div className={styles.coins}>
           <Image src="/coin.png" alt="coin" className={styles.pomos} width={40} height={40}/>
           <p>{userCoins}</p>
         </div>
         <nav className={styles.navigator}>
-          {/* tus links */}
           <Link href="/pages/home"><Image src="/icons/home.svg" alt="home" width={5} height={5} className={styles.icon}/></Link>
           <Link href="/pages/calendar"><Image src="/icons/calendar-regular-full.svg" alt="cal" width={5} height={5} className={styles.icon}/></Link>
           <Link href="/pages/shop"><Image src="/icons/shopping-cart.svg" alt="shop" width={5} height={5} className={styles.icon}/></Link>
