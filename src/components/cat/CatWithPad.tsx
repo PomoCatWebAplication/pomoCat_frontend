@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./CatWithPad.module.css";
 import { CSSProperties } from "react";
 
+
 type Props = { src: string; alt?: string; size?: number };
 
 type Item = {
