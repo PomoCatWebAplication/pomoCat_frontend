@@ -1,44 +1,140 @@
-/* Añade estos estilos a tu calendar.module.css existente */
+html, 
+body {
+  overflow: hidden;
+}
 
-.loading {
+.container {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.coins {
+  background: #D4DBB2;
+  border-radius: 12px;
+  padding: 2px 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 400px;
-  font-size: 18px;
-  color: #666;
+  height: 70%;
 }
 
-.error {
-  background: #fee;
-  border: 1px solid #fcc;
-  border-radius: 8px;
-  padding: 16px;
-  margin: 20px;
-  color: #c33;
-  display: flex;
-  justify-content: space-between;
+.coins p {
+  font-size: 1rem;
+  line-height: 1;
+  margin: 0;
+}
+
+.pomos {
+  height: 50%;
+  width: auto;
+  display: block;
+  margin-right: 5px;
+}
+
+.header {
+  --header-h: 44px;
+  margin: 4px;
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  min-height: var(--header-h);
+  box-sizing: border-box;
+  width: calc(100% - 8px);
+  max-width: none;
 }
 
-.error button {
-  background: #e74c3c;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
+.navigator {
+  justify-self: end;
+  width: max-content;
+  background: #D4DBB2;
+  border-radius: 12px;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
   cursor: pointer;
-  font-size: 14px;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              filter 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.error button:hover {
-  background: #c0392b;
+.icon:hover {
+  transform: scale(1.2);         
+  filter: brightness(1.15);       
+}
+
+.icon:active {
+  transform: scale(0.9);         
+}
+
+.title {
+  font-family: "Madimi One", sans-serif;
+  font-size: 2rem;
+  margin: 16px 20px 16px 20px;
+  color: #333;
+  text-align: center;
+}
+
+.calendarWrapper {
+  flex: 1;
+  margin: 0 10px 10px 10px;
+  background: #ffffffcc;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  min-height: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+  min-width: 800px;
+}
+
+.headerRow, 
+.row {
+  display: grid;
+  grid-template-columns: 60px repeat(7, 1fr);
+}
+
+.dayHeader {
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 6px;
+  background: #CFD7AF;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+.hourCell {
+  text-align: right;
+  padding: 6px 8px;
+  font-weight: 600;
+  background: #CFD7AF;
+  border: 1px solid #ccc;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .cell {
-  position: relative;
+  border: 1px solid #ccc;
+  min-height: 50px;
+  padding: 4px;
+  background: #fff;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  position: relative;
 }
 
 .cell:hover {
@@ -47,54 +143,61 @@
 
 .task {
   position: relative;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 6px 10px;
-  margin: 2px;
-  border-radius: 6px;
-  font-size: 12px;
+  background: #CFD7AF;
+  border-radius: 8px;
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  font-size: 0.8rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 8px;
+  gap: 6px;
   transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid #b8c499;
 }
 
 .task:hover {
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  background: #d8e1b8;
 }
 
 .taskContent {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   min-width: 0;
+  overflow: hidden;
 }
 
 .taskTime {
-  font-weight: 600;
-  font-size: 11px;
-  opacity: 0.9;
-}
-
-.taskNote {
-  font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #2d3a2b;
   white-space: nowrap;
 }
 
+.taskNote {
+  font-size: 0.8rem;
+  color: #41513f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
 .deleteBtn {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  width: 20px;
-  height: 20px;
+  background: rgba(231, 76, 60, 0.1);
+  border: 1px solid rgba(231, 76, 60, 0.3);
+  color: #e74c3c;
+  width: 22px;
+  height: 22px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,8 +208,13 @@
 }
 
 .deleteBtn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(231, 76, 60, 0.2);
+  border-color: #e74c3c;
   transform: scale(1.1);
+}
+
+.deleteBtn:active {
+  transform: scale(0.95);
 }
 
 .addPlanBtn {
@@ -116,24 +224,108 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #e74c3c;
-  color: white;
-  border: none;
+  background: #CFD7AF;
+  color: #41513f;
+  border: 3px solid #b8c499;
   font-size: 32px;
+  font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
+  line-height: 1;
 }
 
 .addPlanBtn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(231, 76, 60, 0.5);
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  background: #d8e1b8;
 }
 
 .addPlanBtn:active {
+  transform: scale(0.95) rotate(90deg);
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  font-size: 18px;
+  color: #666;
+  font-family: "Madimi One", sans-serif;
+}
+
+.error {
+  background: #fee;
+  border: 2px solid #fcc;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 20px;
+  color: #c33;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  max-width: 800px;
+  width: 90%;
+  font-size: 14px;
+}
+
+.error button {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.error button:hover {
+  background: #c0392b;
+  transform: scale(1.05);
+}
+
+.error button:active {
   transform: scale(0.95);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .calendar {
+    min-width: 600px;
+  }
+  
+  .dayHeader {
+    font-size: 0.75rem;
+    padding: 6px 4px;
+  }
+  
+  .hourCell {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+  }
+  
+  .taskTime {
+    font-size: 0.7rem;
+  }
+  
+  .taskNote {
+    font-size: 0.75rem;
+  }
+  
+  .addPlanBtn {
+    width: 50px;
+    height: 50px;
+    font-size: 28px;
+    bottom: 30px;
+    right: 30px;
+  }
 }

@@ -1,13 +1,16 @@
 // lib/services/tasks.service.ts
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
 export interface Task {
-  id: string;
+  _id: string; // MongoDB usa _id
+  id?: string; // Alias opcional
   title: string;
   description?: string;
-  status: 'pending' | 'in_progress' | 'completed';
-  priority?: 'low' | 'medium' | 'high';
-  dueDate?: string;
+  state: 'COMPLETED' | 'PENDING' | 'IN_PROGRESS';
+  notifyLocalTime?: string;
+  dailyMinutes?: number;
+  timezone?: string;
+  dueDate: string;
   userId: string;
   createdAt: string;
   updatedAt: string;
@@ -16,41 +19,68 @@ export interface Task {
 export interface CreateTaskDto {
   title: string;
   description?: string;
-  status?: 'pending' | 'in_progress' | 'completed';
-  priority?: 'low' | 'medium' | 'high';
-  dueDate?: string;
+  state?: 'COMPLETED' | 'PENDING' | 'IN_PROGRESS';
+  notifyLocalTime?: string;
+  dailyMinutes?: number;
+  timezone?: string;
+  dueDate: string;
 }
 
 export interface UpdateTaskDto {
   title?: string;
   description?: string;
-  status?: 'pending' | 'in_progress' | 'completed';
-  priority?: 'low' | 'medium' | 'high';
   dueDate?: string;
+  state?: 'COMPLETED' | 'PENDING' | 'IN_PROGRESS';
 }
 
 class TasksService {
-  private getAuthToken(): string | null {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('token');
+  private userId: string | null = null;
+
+  // Método para setear el userId
+  setUserId(userId: string) {
+    this.userId = userId;
+  }
+
+  // Método para obtener el userId desde el endpoint /api/me
+  private async getUserId(): Promise<string> {
+    if (this.userId !== null) {
+      return this.userId;
     }
-    return null;
+
+    try {
+      const response = await fetch('/api/me', {
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('User not authenticated. Please login again.');
+      }
+
+      const user = await response.json();
+      
+      if (!user || !user._id) {
+        throw new Error('Invalid user data received');
+      }
+      
+      this.userId = user._id;
+      return this.userId;
+    } catch (error) {
+      console.error('Error getting user ID:', error);
+      throw new Error('User not authenticated. Please login again.');
+    }
   }
 
   private async request<T>(
     endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
-    const token = this.getAuthToken();
-    const headers: HeadersInit = {
-      'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...options.headers,
-    };
-
     const response = await fetch(`${API_URL}${endpoint}`, {
       ...options,
-      headers,
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
     });
 
     if (!response.ok) {
@@ -61,13 +91,21 @@ class TasksService {
     return response.json();
   }
 
+  async getAll(): Promise<Task[]> {
+    const userId = await this.getUserId();
+    // GET /tasks/user/:userId
+    return this.request<Task[]>(`/tasks/user/${userId}`);
+  }
 
   async getOne(id: string): Promise<Task> {
-    return this.request<Task>(`/tasks/${id}`);
+    // GET /tasks/task/:id
+    return this.request<Task>(`/tasks/task/${id}`);
   }
 
   async create(dto: CreateTaskDto): Promise<Task> {
-    return this.request<Task>('/tasks', {
+    const userId = await this.getUserId();
+    // POST /tasks/:userId
+    return this.request<Task>(`/tasks/${userId}`, {
       method: 'POST',
       body: JSON.stringify(dto),
     });
@@ -75,7 +113,7 @@ class TasksService {
 
   async update(id: string, dto: UpdateTaskDto): Promise<Task> {
     return this.request<Task>(`/tasks/${id}`, {
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(dto),
     });
   }

@@ -172,3 +172,29 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.toggleContainer {
+  margin-bottom: 8px;
+}
+
+.toggleLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  user-select: none;
+}
+
+.toggleLabel input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #e74c3c;
+}
+
+.toggleLabel span {
+  cursor: pointer;
+}

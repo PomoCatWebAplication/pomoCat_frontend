@@ -5,15 +5,15 @@ import styles from "./calendar.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { dailyPlansService, DailyPlan } from "@/lib/services/daily-plans.service";
-import DailyPlanModal from '@/components/calendar/DailyPlanModal';
-
+import DailyPlanModal from "@/components/calendar/DailyPlanModal";
 
 type Prop = {
-    userid: string
+  userid: string;
+  coins_user: string;
 }
 
-
-export default function CalendarPage({userid} : Prop) {
+export default function CalendarPage({ userid, coins_user }: Prop) {
+  const [coins, setCoins] = useState<number>(parseInt(coins_user, 10) || 0); 
   const [dailyPlans, setDailyPlans] = useState<DailyPlan[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -34,7 +34,7 @@ export default function CalendarPage({userid} : Prop) {
   const loadDailyPlans = async () => {
     try {
       setLoading(true);
-      const plans = await dailyPlansService.getAllByUser( userid );
+      const plans = await dailyPlansService.getAll();
       setDailyPlans(plans);
       setError(null);
     } catch (err) {
@@ -71,6 +71,7 @@ export default function CalendarPage({userid} : Prop) {
 
   const handleDeletePlan = async (planId: string, e: React.MouseEvent) => {
     e.stopPropagation();
+    console.log('ID del plan a eliminar:', planId); // DEBUG
     if (confirm('¿Estás seguro de eliminar este plan?')) {
       try {
         await dailyPlansService.delete(planId);
@@ -114,7 +115,7 @@ export default function CalendarPage({userid} : Prop) {
             width={20}
             height={20}
           />
-          <p>120</p>
+          <p>{coins}</p>
         </div>
 
         <nav className={styles.navigator}>
@@ -192,7 +193,7 @@ export default function CalendarPage({userid} : Prop) {
                   >
                     {plans.map((plan) => (
                       <div 
-                        key={plan.id} 
+                        key={plan._id} 
                         className={styles.task}
                         onClick={(e) => handleEditPlan(plan, e)}
                       >
@@ -206,7 +207,7 @@ export default function CalendarPage({userid} : Prop) {
                         </div>
                         <button
                           className={styles.deleteBtn}
-                          onClick={(e) => handleDeletePlan(plan.id, e)}
+                          onClick={(e) => handleDeletePlan(plan._id, e)}
                           title="Eliminar"
                         >
                           ×
